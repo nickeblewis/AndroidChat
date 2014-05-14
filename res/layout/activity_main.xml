@@ -21,13 +21,23 @@
       android:layout_alignParentBottom="true"
       android:orientation="horizontal">
 
-
+	<EditText
+		android:id="@+id/nameInput"
+		android:layout_height="wrap_content"
+		android:layout_width="wrap_content"
+		android:layout_weight="1"
+		android:lines="1"
+		android:hint="name"
+		android:inputType="textShortMessage"
+		android:singleLine="true" />
+	
     <EditText
-        android:id="@+id/messageInput"
+        android:id="@+id/descriptionInput"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:layout_weight="1"
         android:lines="1"
+		android:hint="description"
         android:inputType="textShortMessage"
         android:singleLine="true" />
 

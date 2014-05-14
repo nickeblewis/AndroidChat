@@ -17,12 +17,12 @@ import java.util.Random;
 public class MainActivity extends ListActivity {
 
     // TODO: change this to your own Firebase URL
-    private static final String FIREBASE_URL = "https://android-chat.firebaseIO-demo.com";
+    private static final String FIREBASE_URL = "https://farnborough.firebaseIO.com";
 
     private String username;
     private Firebase ref;
     private ValueEventListener connectedListener;
-    private ChatListAdapter chatListAdapter;
+    private PlaceListAdapter placeListAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,10 +35,10 @@ public class MainActivity extends ListActivity {
         setTitle("Chatting as " + username);
 
         // Setup our Firebase ref
-        ref = new Firebase(FIREBASE_URL).child("chat");
+        ref = new Firebase(FIREBASE_URL).child("locations");
 
         // Setup our input methods. Enter key on the keyboard or pushing the send button
-        EditText inputText = (EditText)findViewById(R.id.messageInput);
+        EditText inputText = (EditText)findViewById(R.id.descriptionInput);
         inputText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
@@ -64,15 +64,15 @@ public class MainActivity extends ListActivity {
         // Setup our view and list adapter. Ensure it scrolls to the bottom as data changes
         final ListView listView = getListView();
         // Tell our list adapter that we only want 50 messages at a time
-        chatListAdapter = new ChatListAdapter(ref.limit(50), this, R.layout.chat_message, username);
-        listView.setAdapter(chatListAdapter);
-        chatListAdapter.registerDataSetObserver(new DataSetObserver() {
-            @Override
-            public void onChanged() {
-                super.onChanged();
-                listView.setSelection(chatListAdapter.getCount() - 1);
-            }
-        });
+       placeListAdapter = new PlaceListAdapter(ref, this, R.layout.chat_message, username);
+       listView.setAdapter(placeListAdapter);
+        placeListAdapter.registerDataSetObserver(new DataSetObserver() {
+           @Override
+           public void onChanged() {
+              super.onChanged();
+               listView.setSelection(placeListAdapter.getCount() - 1);
+           }
+       });
 
         // Finally, a little indication of connection status
         connectedListener = ref.getRoot().child(".info/connected").addValueEventListener(new ValueEventListener() {
@@ -95,10 +95,10 @@ public class MainActivity extends ListActivity {
 
     @Override
     public void onStop() {
-        super.onStop();
-        ref.getRoot().child(".info/connected").removeEventListener(connectedListener);
-        chatListAdapter.cleanup();
-    }
+       super.onStop();
+       ref.getRoot().child(".info/connected").removeEventListener(connectedListener);
+        placeListAdapter.cleanup();
+   }
 
     private void setupUsername() {
         SharedPreferences prefs = getApplication().getSharedPreferences("ChatPrefs", 0);
@@ -112,14 +112,17 @@ public class MainActivity extends ListActivity {
     }
 
     private void sendMessage() {
-        EditText inputText = (EditText)findViewById(R.id.messageInput);
-        String input = inputText.getText().toString();
-        if (!input.equals("")) {
+		EditText nameText = (EditText)findViewById(R.id.nameInput);
+        EditText descriptionText = (EditText)findViewById(R.id.descriptionInput);
+		String name = nameText.getText().toString();
+        String description = descriptionText.getText().toString();
+        if (!description.equals("")) {
             // Create our 'model', a Chat object
-            Chat chat = new Chat(input, username);
+            Place place = new Place(name, description);
             // Create a new, auto-generated child of that chat location, and save our chat data there
-            ref.push().setValue(chat);
-            inputText.setText("");
+            ref.push().setValue(place);
+            descriptionText.setText("");
+			nameText.setText("");
         }
     }
 }
