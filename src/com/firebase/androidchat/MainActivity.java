@@ -32,7 +32,7 @@ public class MainActivity extends ListActivity {
         // Make sure we have a username
         setupUsername();
 
-        setTitle("i Chatting as " + username);
+        setTitle("Chatting as " + username);
 
         // Setup our Firebase ref
         ref = new Firebase(FIREBASE_URL).child("locations");
