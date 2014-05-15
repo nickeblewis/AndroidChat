@@ -36,17 +36,20 @@
 			android:id="@+id/descriptionInput"
 			android:layout_height="wrap_content"
 			android:layout_width="match_parent"
-			android:lines="10"
+			android:lines="5"
 			android:layout_weight="1"
 			android:hint="description"
 			android:inputType="textMultiLine"
-			android:singleLine="true"/>
+			android:singleLine="true"
+            android:gravity="top" />
 
 		<ImageButton
 			android:id="@+id/sendButton"
 			android:layout_height="wrap_content"
-			android:layout_width="wrap_content"
-			android:src="@android:drawable/ic_menu_send"/>
+			android:layout_width="fill_parent"
+			android:src="@android:drawable/ic_menu_send"
+            android:layout_gravity="right"
+            android:contentDescription="Submit" />
 
 	</LinearLayout>
 

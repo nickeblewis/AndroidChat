@@ -10,6 +10,7 @@ public class Place {
     private String name;
     private String description;
 
+
     // Required default constructor for Firebase object mapping
     @SuppressWarnings("unused")
     private Place() { }
@@ -17,6 +18,7 @@ public class Place {
     Place(String name, String description) {
         this.name = name;
         this.description = description;
+
     }
 
     public String getName() {
@@ -26,4 +28,6 @@ public class Place {
     public String getDescription() {
         return description;
     }
+
+
 }
