@@ -22,6 +22,12 @@
 		android:orientation="vertical"
 		android:background="#D1C3C2">
 
+		<TextView
+			android:layout_height="wrap_content"
+			android:text="Add new location"
+			android:layout_width="wrap_content"
+			android:textSize="14sp"/>
+
 		<EditText
 			android:id="@+id/nameInput"
 			android:layout_height="wrap_content"
@@ -41,15 +47,15 @@
 			android:hint="description"
 			android:inputType="textMultiLine"
 			android:singleLine="true"
-            android:gravity="top" />
+			android:gravity="top"/>
 
 		<ImageButton
 			android:id="@+id/sendButton"
 			android:layout_height="wrap_content"
 			android:layout_width="fill_parent"
 			android:src="@android:drawable/ic_menu_send"
-            android:layout_gravity="right"
-            android:contentDescription="Submit" />
+			android:layout_gravity="right"
+			android:contentDescription="Submit"/>
 
 	</LinearLayout>
 

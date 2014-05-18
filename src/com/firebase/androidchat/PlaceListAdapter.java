@@ -46,6 +46,6 @@ public class PlaceListAdapter extends FirebaseListAdapter<Place> {
         //    nameText.setTextColor(Color.BLUE);
       //  }
 	  ((TextView)view.findViewById(R.id.name)).setText(place.getName());
-      //((TextView)view.findViewById(R.id.description)).setText(place.getDescription());
+      ((TextView)view.findViewById(R.id.description)).setText(place.getDescription());
     }
 }
